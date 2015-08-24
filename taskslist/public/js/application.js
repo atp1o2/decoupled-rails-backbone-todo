@@ -9,7 +9,7 @@
 //-------------------------------
 App.Models.Task = Backbone.Model.extend({
   defaults: {
-    content: '',
+    content: 'null',
     completed: false
   }
 });
@@ -29,12 +29,16 @@ App.Collections.Tasks = Backbone.Collection.extend({
 // singular item
 var TaskView = Backbone.View.extend({
   // tagName is a special method that works with template
-  tagName: 'li',
+  tagName: 'p',
   template: _.template("<%= content %>"),
-  initialize: function(opts){
-    return this.itemView = opts.itemView;
+  initialize: function(passedModel){
+    // _.bindAll(this, "render")
+    // console.log(opts.model)
+    // whatever this model is should be passed to render()
+    return this.model = passedModel.model;
   },
   render: function(){
+    //pass in object from initialize
     this.$el.html(this.template(this.model.attributes));
     return this;
   }
@@ -48,10 +52,12 @@ App.Views.AllView = Backbone.View.extend({
   },
 
   render: function(){
-    var col = this.collection.models;
-    for(var i = 0; i <= col.length; i++) {
-      var model = col[i];
-      var taskView = new TaskView({ model: model });
+    // models = array of the model objects
+    var models = this.collection.models;
+    for(var i = 0; i < models.length; i++) {
+      var taskView = new TaskView({ model: models[i] });
+      //this is just appending the entire collection
+      console.log(taskView)
       this.$el.append(taskView.render().el);
     }
   }

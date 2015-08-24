@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+Task.create(content: "First Task Ever")
+Task.create(content: "Learn backbone.js")
+Task.create(content: "Learn how to post to routes")
