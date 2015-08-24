@@ -1,27 +1,3 @@
-  window.App = {
-    Models: {},
-    Collections: {},
-    Views: {}
-  }
-
-//-------------------------------
-// MODEL
-//-------------------------------
-App.Models.Task = Backbone.Model.extend({
-  defaults: {
-    content: 'null',
-    completed: false
-  }
-});
-
-//-------------------------------
-// COLLECTION
-//-------------------------------
-App.Collections.Tasks = Backbone.Collection.extend({
-  url: 'http://localhost:3000/tasks',
-  model: App.Models.Task
-})
-
 //-------------------------------
 // VIEW
 //-------------------------------
@@ -64,17 +40,3 @@ App.Views.AllView = Backbone.View.extend({
     }
   }
 })
-
-
-//-------------------------------
-// Instances
-//-------------------------------
-$(document).ready(function() {
-  App.tasks = new App.Collections.Tasks;
-  App.allView = new App.Views.AllView({
-    // sets view.collection equalTo= tasks.collection
-    collection: App.tasks
-  });
-  return App.tasks.fetch();
-});
-
